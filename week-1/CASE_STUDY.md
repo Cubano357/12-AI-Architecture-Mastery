@@ -1,7 +1,7 @@
 # Business Research Agent
 ### AI Solutions Architecture Case Study — Week 1 of 12
 
-**Role:** David Bay, Solutions Architect & Project Owner
+**Role:** David El Corderu Bey, PhD, Solutions Architect & Project Owner
 **Implementation partner:** Claude (Senior AI Engineer / pair programmer)
 **Program:** 12-Week AI Solutions Architect Mastery — a self-directed curriculum built by doing real architecture work and documenting it as it happens, not by following a tutorial.
 
