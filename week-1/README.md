@@ -13,7 +13,7 @@ The agent researches a business question about a small medical practice (chiropr
 
 ## The one non-negotiable architectural decision
 
-**Every cited source is verified against real tool output before the report is trusted.** `verification.py` compares each URL in the model's submitted `sources` list against the actual set of URLs `search_web` returned during that run. Anything that doesn't match is flagged as unverified and excluded from the "verified" count. If fewer than 3 sources verify, the report ships with a loud warning and the program exits non-zero — this was tightened from "ask the model nicely" to "check it in code" specifically because a prompt instruction is a request the model can get wrong; a set-membership check cannot.
+**Every cited source is verified against real tool output before the report is trusted.** `verification.py` compares each URL in the model's submitted `sources` list against the actual set of URLs `search_web` returned during that run. Anything that doesn't match is flagged as unverified and excluded from the "verified" count. If fewer than 5 sources verify, the report ships with a loud warning and the program exits non-zero — this was tightened from "ask the model nicely" to "check it in code" specifically because a prompt instruction is a request the model can get wrong; a set-membership check cannot.
 
 ## Hard scope boundary
 
