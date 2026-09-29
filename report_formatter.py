@@ -6,7 +6,7 @@ VerificationResult); this file is the only place that knows what the
 output file should look like. If you ever want to change the report to
 HTML, JSON, or a different layout, this is the only file that changes.
 """
-from verification import VerificationResult
+from verification import MIN_REQUIRED_VERIFIED_SOURCES, VerificationResult
 
 
 def format_report(brief: dict, verification: VerificationResult) -> str:
@@ -20,7 +20,7 @@ def format_report(brief: dict, verification: VerificationResult) -> str:
             f"> ⚠️ **VERIFICATION WARNING:** Only {len(verification.verified_sources)} of "
             f"{len(brief['sources'])} claimed sources could be confirmed as real search "
             "results. This report does not meet the minimum of "
-            f"{3} verified sources and should not be treated as fully reliable. "
+            f"{MIN_REQUIRED_VERIFIED_SOURCES} verified sources and should not be treated as fully reliable. "
             "See 'Unverified Sources' below."
         )
         lines.append("")

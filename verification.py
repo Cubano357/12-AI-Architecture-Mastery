@@ -11,7 +11,7 @@ nothing to interpret.
 """
 from dataclasses import dataclass
 
-MIN_REQUIRED_VERIFIED_SOURCES = 3
+MIN_REQUIRED_VERIFIED_SOURCES = 5
 
 
 @dataclass
