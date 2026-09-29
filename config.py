@@ -33,3 +33,17 @@ def get_tavily_api_key() -> str:
             "as an environment variable."
         )
     return key
+
+
+def get_telegram_bot_token() -> str | None:
+    """
+    Optional, unlike the two above: the agent's CORE function (research a
+    question, return a verified brief) must not break if notifications
+    aren't configured. Returns None rather than raising - notify.py treats
+    a missing token as "skip sending," not an error.
+    """
+    return os.environ.get("TELEGRAM_BOT_TOKEN")
+
+
+def get_telegram_chat_id() -> str | None:
+    return os.environ.get("TELEGRAM_CHAT_ID")
