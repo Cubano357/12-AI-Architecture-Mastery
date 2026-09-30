@@ -47,9 +47,9 @@ This is the difference between a system that *asks* an LLM to be reliable and on
 Live run, real Claude API call, real web search, no mocks:
 
 > **Question:** *"What local marketing tactics work best for a new chiropractic office trying to attract its first patients?"*
-> **Result:** 13 sources cited, **13 verified** against real search results. Exit code 0.
+> **Result:** 14 sources cited, **14 verified** against real search results. Exit code 0.
 
-Findings included specific, checkable tactics (Google Business Profile optimization, local referral partnerships, first-visit offers) each tied to a real, clickable source — not summarized folklore.
+Findings included specific, checkable tactics (Google Business Profile optimization, local referral partnerships, first-visit offers) each tied to a real, clickable source — not summarized folklore. The full, unedited output of this run is committed as [`SAMPLE_VERIFIED_RUN.md`](./SAMPLE_VERIFIED_RUN.md) — the actual evidence, not just the claim.
 
 ## What Was Deliberately Not Built
 
