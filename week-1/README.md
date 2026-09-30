@@ -47,7 +47,7 @@ The system prompt (`system_prompt.py`) draws a hard line: business research only
 
 ## Status
 
-Code is written and believed correct (verified the exact current Anthropic tool-use API shape against live docs before writing the loop), but **not yet run end-to-end** — needs `ANTHROPIC_API_KEY` and `TAVILY_API_KEY` in a `.env` file (see `.env.example`) or as environment variables.
+**Run end-to-end against the real Claude and Tavily APIs.** Live test: 13 sources cited, 13 verified against real search results, exit code 0 (see `CASE_STUDY.md` for the full run). Needs `ANTHROPIC_API_KEY` and `TAVILY_API_KEY` in a `.env` file (see `.env.example`) or as environment variables.
 
 ## Open items for Phase 2 (not this week)
 
