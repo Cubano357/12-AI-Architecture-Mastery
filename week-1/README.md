@@ -96,6 +96,21 @@ Known risk surface for a Week 1 MVP, documented from actually reading the code �
 
 **Is retrieved web content treated as untrusted input? Not explicitly.** There's no delimiter, framing, or instruction in `system_prompt.py` telling the model to treat `search_web` results with more suspicion than any other input. The only real control in the system is `verification.py`'s after-the-fact URL-membership check — which catches a citation for a URL that was never returned, but would **not** catch an injected instruction hidden inside the content of a URL that *was* genuinely returned.
 
+## Failure modes
+
+Verified against the actual code, not assumed from the design — two of these six are genuinely handled by design; the other four all currently collapse to the same fallback.
+
+| Failure scenario | Actual behavior | Handled? |
+|---|---|---|
+| Claude API call fails (auth, rate limit, network) | No `try`/`except` around `client.messages.create()` in `agent.py` — the exception propagates uncaught to a raw traceback, exit code 1 | Not handled — crashes rather than failing cleanly |
+| Tavily API call fails (auth, rate limit, network) | `search_tool.py`'s docstring says this is deliberate — "errors DO raise... not something to silently paper over" — but nothing catches them in `agent.py` either; same raw traceback, exit code 1 | Not handled — a deliberate "don't hide it" choice, but not a graceful path |
+| Claude cites a URL never returned by `search_web` | `verify_sources()` flags it as unverified and excludes it from the verified count | **Handled** — this is the system's core guarantee |
+| Fewer than 5 verified sources | `verification.passed = False`; report ships with a visible warning; `run.py` exits with code 2 | **Handled** — a deliberate, enforced success criterion |
+| Claude never calls `submit_research_brief` (stalls, or replies in plain text) | `agent.py` raises `RuntimeError` — immediately if the model responds without any tool call, or after `MAX_TOOL_ROUNDS = 6` rounds | Bounded (cannot run forever or loop indefinitely) but not caught — surfaces as an uncaught exception, exit code 1 |
+| Model's structured output is missing a field or has the wrong shape | Nothing validates the brief's shape before use — `verify_sources()` and `format_report()` index it directly (`brief["sources"]`, `brief["executive_summary"]`, etc.), so a malformed brief raises a raw `KeyError` wherever the missing field is first accessed | Not handled — no schema-validation layer exists in v1 |
+
+That's not nothing — nothing hangs, and nothing silently succeeds on bad data — but four of six failure paths are indistinguishable from each other today: "Claude is down," "Tavily is down," and "the model returned garbage" all surface as the same uncaught-exception, exit-code-1 crash. Explicit `try`/`except` boundaries in `run.py` and shape-validating the model's output before use are the natural next hardening step, not built in v1 because this week's scope never needed to tell those failures apart.
+
 ## Open items for Phase 2 (not this week)
 
 - Code-level enforcement of the non-clinical scope boundary (currently prompt-only).
