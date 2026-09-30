@@ -63,6 +63,22 @@ Full, unedited output of this run is committed as [`SAMPLE_VERIFIED_RUN.md`](./S
 
 Needs `ANTHROPIC_API_KEY` and `TAVILY_API_KEY` in a `.env` file (see `.env.example`) or as environment variables.
 
+## Evaluation
+
+What's actually been tested versus what's still open — a scope statement, not a passing grade.
+
+| Test | Result |
+|---|---|
+| Valid research question produces a brief | Pass |
+| ≥5 verified sources on a real run | Pass |
+| 14/14 source membership verification (cited URL was actually returned by search_web) | Pass |
+| Invalid / unreturned URL correctly flagged as unverified | Needs explicit negative test |
+| Insufficient verified sources correctly fails with exit code 2 | Needs explicit negative test |
+| Clinical-question boundary enforcement | Not code-enforced (prompt-only, see above) |
+| Claim/source semantic alignment — does the cited page actually support the claim, not just exist | Not evaluated |
+
+**Source verification ≠ claim verification.** `verify_sources()` proves a cited URL is one `search_web` genuinely returned this run — it does not prove that URL's content actually supports the specific finding attached to it. That second check would require reading the source content and judging semantic support, which is a real (and harder) evaluation problem, not a set-membership check. This is a documented limitation of v1, not a flaw discovered after the fact.
+
 ## Open items for Phase 2 (not this week)
 
 - Code-level enforcement of the non-clinical scope boundary (currently prompt-only).
