@@ -1,7 +1,7 @@
 # Week 1 — Business Research Agent
 
 **Program:** 12-Week AI Solutions Architect Mastery
-**Role split:** David = Solutions Architect / project owner. Claude = Senior AI Engineer / pair programmer, implementing and teaching the architecture, not deciding it unilaterally.
+**Role split:** David El Corderu Bey, PhD = Solutions Architect / project owner. Claude = Senior AI Engineer / pair programmer, implementing and teaching the architecture, not deciding it unilaterally.
 
 ## What this is
 
@@ -10,6 +10,12 @@ A single Claude agent with two tools:
 2. `submit_research_brief` — a structured "final answer" tool. Forcing the output through a schema instead of free text is what makes source verification a plain data check instead of parsing prose.
 
 The agent researches a business question about a small medical practice (chiropractic offices as the v1 use case) and returns a structured brief: Research Question, Executive Summary, Key Findings, Opportunities, Risks, Sources.
+
+## Architecture
+
+Mapped directly from the implementation — every box below corresponds to a real file and function, not an aspirational design.
+
+![Business Research Agent architecture diagram](./architecture-diagram.svg)
 
 ## The one non-negotiable architectural decision
 
