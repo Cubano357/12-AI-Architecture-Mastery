@@ -72,12 +72,14 @@ What's actually been tested versus what's still open — a scope statement, not 
 | Valid research question produces a brief | Pass |
 | ≥5 verified sources on a real run | Pass |
 | 14/14 source membership verification (cited URL was actually returned by search_web) | Pass |
-| Invalid / unreturned URL correctly flagged as unverified | Needs explicit negative test |
-| Insufficient verified sources correctly fails with exit code 2 | Needs explicit negative test |
+| Invalid / unreturned URL correctly flagged as unverified | Pass — `tests/test_failure_modes.py::test_unreturned_url_is_flagged_unverified` |
+| Insufficient verified sources correctly fails with exit code 2 | Pass — `tests/test_failure_modes.py::test_insufficient_verified_sources_exits_with_code_2` |
 | Clinical-question boundary enforcement | Not code-enforced (prompt-only, see above) |
 | Claim/source semantic alignment — does the cited page actually support the claim, not just exist | Not evaluated |
 
 **Source verification ≠ claim verification.** `verify_sources()` proves a cited URL is one `search_web` genuinely returned this run — it does not prove that URL's content actually supports the specific finding attached to it. That second check would require reading the source content and judging semantic support, which is a real (and harder) evaluation problem, not a set-membership check. This is a documented limitation of v1, not a flaw discovered after the fact.
+
+**Running the tests:** `pip install -r requirements-dev.txt && pytest tests/ -v`. Both tests exercise the real `verify_sources()` and `run.main()` code paths — only `agent.run_agent` (the network-calling boundary) is replaced, so these prove the actual wiring, not a reimplementation of it.
 
 ## Security notes
 
