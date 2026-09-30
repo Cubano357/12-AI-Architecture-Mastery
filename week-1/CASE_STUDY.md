@@ -1,5 +1,5 @@
 # Business Research Agent
-### AI Solutions Architecture Case Study — Week 1 of 12
+### AI Solutions Architecture Case Study #1: I identified a business problem, evaluated an AI-based solution, designed the architecture, implemented a constrained MVP, established verification controls, tested it, analyzed its limitations, and documented the architectural trade-offs.
 
 **Role:** David El Corderu Bey, PhD, Solutions Architect & Project Owner
 **Implementation partner:** Claude (Senior AI Engineer / pair programmer)
