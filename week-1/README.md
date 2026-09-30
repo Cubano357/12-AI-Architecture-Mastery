@@ -47,7 +47,21 @@ The system prompt (`system_prompt.py`) draws a hard line: business research only
 
 ## Status
 
-**Run end-to-end against the real Claude and Tavily APIs.** Live test: 14 sources cited, 14 verified against real search results, exit code 0. The full output is committed as [`SAMPLE_VERIFIED_RUN.md`](./SAMPLE_VERIFIED_RUN.md) — see `CASE_STUDY.md` for the narrative. Needs `ANTHROPIC_API_KEY` and `TAVILY_API_KEY` in a `.env` file (see `.env.example`) or as environment variables.
+**Live validation**
+
+| Check | Result |
+|---|---|
+| Claude API | Passed |
+| Tavily API | Passed |
+| Minimum verified sources required | 5 |
+| Latest test | 14 cited / 14 verified |
+| Exit code | 0 |
+| Test question | "What local marketing tactics work best for a new chiropractic office trying to attract its first patients?" |
+| Date (UTC) | 2026-09-30 |
+
+Full, unedited output of this run is committed as [`SAMPLE_VERIFIED_RUN.md`](./SAMPLE_VERIFIED_RUN.md) — this is evidence that it worked, not a claim that it should. See `CASE_STUDY.md` for the narrative.
+
+Needs `ANTHROPIC_API_KEY` and `TAVILY_API_KEY` in a `.env` file (see `.env.example`) or as environment variables.
 
 ## Open items for Phase 2 (not this week)
 
